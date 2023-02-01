@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'Constant/const.dart';
+import 'Pages/WebAppBar/webapp.dart';
+import 'Widget/responsive.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -42,44 +46,34 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: RichText(text: const TextSpan(
-                  children: [
-                    TextSpan(text: "Flutter ", style: TextStyle(fontSize: 18, color: Colors.white)),
-                    TextSpan(text: "Bangla", style: TextStyle(fontSize: 15, color: Colors.blue)),
-                  ]
-                )),
+      appBar:
+      ResponsiveWidget.isSmallScreen(context)?
+          AppBar(
+            elevation: 0,
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    gradient: Constant.linearGradient),
               ),
+            title:  RichText(text: const TextSpan(
+                children: [
+                  TextSpan(text: "Flutter ", style: TextStyle(fontSize: 18, color: Colors.white)),
+                  TextSpan(text: "Bangla", style: TextStyle(fontSize: 15, color: Colors.blue)),
+                ]
 
+            ))):
+      PreferredSize(
+        preferredSize: Size(size.width, 80),
+        child:
 
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("Home",style: TextStyle(fontSize: 18, color: Colors.white),),
-                    Text("Tutorial",style: TextStyle(fontSize: 18, color: Colors.white)),
-                    Text("Hire Us",style: TextStyle(fontSize: 18, color: Colors.white)),
-                    Text("Blog",style: TextStyle(fontSize: 18, color: Colors.white)),
-                    Text("About Us",style: TextStyle(fontSize: 18, color: Colors.white)),
-
-                  ],
-                ),
-              )
-
-            ],
-          ),
-        ),
-        elevation: 0,
+        const WebAppBarWidget()
       ),
+      endDrawer:
+
+
+      ResponsiveWidget.isSmallScreen(context)?   Drawer(
+
+      ):null,
 
           );
 
