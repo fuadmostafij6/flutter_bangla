@@ -18,15 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
@@ -41,7 +33,56 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>with SingleTickerProviderStateMixin  {
+  AnimationController? _animationController;
+
+  Animation<double>? _menuBackgroundAnimation;
+
+  List<Animation<Offset>> ?_listAnimation;
+
+  Animation<double> ?_fadeAnimation;
+
+  List<String> _menuList = [
+    'ABOUT',
+    'SHARE',
+    'ACTIVITY',
+    'SETTINGS',
+    'CONTACT',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+
+    _menuBackgroundAnimation =
+        Tween<double>(begin: 0, end: 1000).animate(CurvedAnimation(
+          parent: _animationController!,
+          curve: Curves.ease,
+        ));
+
+    _listAnimation = List.generate(_menuList.length, (index) {
+      return Tween<Offset>(
+        begin: Offset(0, 0),
+        end: Offset(0, index * 50 * 1.0),
+      ).animate(CurvedAnimation(
+          parent: _animationController!,
+          curve: Interval(index * 0.1, index * 0.1 + 0.3)));
+    });
+
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+      parent: _animationController!,
+      curve: Interval(0.4, 0.7),
+    ));
+  }
+
+  @override
+  void dispose() {
+    _animationController!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
