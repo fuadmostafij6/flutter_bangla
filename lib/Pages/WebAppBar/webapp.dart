@@ -19,6 +19,7 @@ class WebAppBarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            //new
             SizedBox(
               width:size.width*0.25 ,
               child: RichText(text: const TextSpan(
