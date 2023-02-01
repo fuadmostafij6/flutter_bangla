@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage>
   Animation<double>? _fadeAnimation;
 
   List<String> _menuList = [
-    'ABOUT',
-    'SHARE',
-    'ACTIVITY',
-    'SETTINGS',
-    'CONTACT',
+    'Home',
+    'Tutorial',
+    'Hire Us',
+    'Blog',
+    'About Us',
   ];
 
   @override
