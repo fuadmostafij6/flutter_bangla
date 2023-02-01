@@ -41,9 +41,9 @@ dev_dependencies:
     sdk: flutter
 
 
-  build_runner: ^2.1.0
-  build_test: ^2.1.0
-  build_web_compilers: ^3.0.0
+  build_runner: ^2.3.3
+  build_test: ^2.1.6
+  build_web_compilers: ^3.2.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
